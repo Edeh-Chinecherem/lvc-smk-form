@@ -1,0 +1,54 @@
+/* Dashboard Styles */
+.dashboard-container {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+.dashboard-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.dashboard-logo {
+    max-width: 80px;
+    margin-right: 20px;
+}
+
+.dashboard-title {
+    color: green;
+    font-size: 24px;
+}
+
+.dashboard-main {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.dashboard-table th, .dashboard-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.dashboard-table th {
+    background-color: green;
+    color: white;
+}
+
+.dashboard-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.dashboard-table tr:hover {
+    background-color: #f1f1f1;
+}

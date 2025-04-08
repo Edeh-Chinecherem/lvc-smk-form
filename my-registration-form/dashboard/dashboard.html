@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LVC 2025 SMK Zone Dashboard</title>
+    <link rel="stylesheet" href="src/styles.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <img src="../img/sulogo.jpg" alt="LVC SMK Zone Logo" class="dashboard-logo">
+            <h1 class="dashboard-title">LVC 2025 SMK Zone Dashboard</h1>
+        </header>
+        <main class="dashboard-main">
+            <h2>Registered Users</h2>
+
+            <!-- Section for Campers -->
+            <section>
+                <h3>Campers</h3>
+                <table class="dashboard-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Gender</th>
+                            <th>Email</th>
+                            <th>Address</th>
+                            <th>Phone</th>
+                            <th>School</th>
+                            <th>Church</th>
+                            <th>Age</th>
+                            <th>Class</th>
+                            <th>Community</th>
+                            <th>Medical Conditions</th>
+                            <th>Medical Details</th>
+                        </tr>
+                    </thead>
+                    <tbody id="camper-data">
+                        <!-- Camper data will be dynamically inserted here -->
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Section for SUCF -->
+            <section>
+                <h3>SUCF</h3>
+                <table class="dashboard-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Gender</th>
+                            <th>Email</th>
+                            <th>Address</th>
+                            <th>Phone</th>
+                            <th>Church</th>
+                        </tr>
+                    </thead>
+                    <tbody id="sucf-data">
+                        <!-- SUCF data will be dynamically inserted here -->
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Section for Pilgrims -->
+            <section>
+                <h3>Pilgrims</h3>
+                <table class="dashboard-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Gender</th>
+                            <th>Email</th>
+                            <th>Address</th>
+                            <th>Phone</th>
+                            <th>Church</th>
+                        </tr>
+                    </thead>
+                    <tbody id="pilgrim-data">
+                        <!-- Pilgrim data will be dynamically inserted here -->
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+    <script src="src/dashboard.js"></script>
+</body>
+</html>
