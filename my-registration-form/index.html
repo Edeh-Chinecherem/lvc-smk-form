@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVC SMK Zone</title>
+    <link rel="stylesheet" href="src/styles.css" />
+  </head>
+  <body>
+    <div class="form-container">
+        <img src="img/sulogo.jpg" alt="LVC SMK Zone Logo" class="form-logo" />
+      <h1 class="form-title">LVC SMK Zone</h1>
+      <form id="registration-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required />
+
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender" required>
+          <option value="">Select</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="address">Address:</label>
+        <textarea id="address" name="address" rows="3" required></textarea>
+
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" required />
+
+        <label for="category">Category:</label>
+        <select id="category" name="category" required>
+          <option value="">Select</option>
+          <option value="pilgrim">Pilgrim</option>
+          <option value="sucf">SUCF</option>
+          <option value="camper">Camper</option>
+        </select>
+
+        <label for="school">Name of School:</label>
+        <input type="text" id="school" name="school" required />
+
+        <label for="church">Name of Church:</label>
+        <input type="text" id="church" name="church" required />
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" min="1" max="100" required />
+
+        <label for="class">Class:</label>
+        <select id="class" name="class" required>
+          <option value="">Select</option>
+          <option value="jss1">JSS1</option>
+          <option value="jss2">JSS2</option>
+          <option value="jss3">JSS3</option>
+          <option value="ss1">SS1</option>
+          <option value="ss2">SS2</option>
+          <option value="ss3">SS3</option>
+          <option value="school-leaver">School Leaver</option>
+        </select>
+
+        
+
+        <label for="group">Group:</label>
+        <input type="text" id="group" name="group" required />
+
+        <label for="medical-conditions">Do you have medical conditions?</label>
+        <select id="medical-conditions" name="medical-conditions" required>
+          <option value="no">No</option>
+          <option value="yes">Yes</option>
+        </select>
+
+        <div id="medical-details-container" style="display: none">
+          <label for="medical-details">If yes, please specify:</label>
+          <textarea
+            id="medical-details"
+            name="medical-details"
+            rows="3"
+          ></textarea>
+        </div>
+
+                <button type="submit">Submit</button>
+      </form>
+    </div>
+    <script src="src/script.js"></script>
+  </body>
+</html>
