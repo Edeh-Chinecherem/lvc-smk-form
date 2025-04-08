@@ -1,45 +1,58 @@
+// Community names
+const communityNames = [
+    "Faith", "Hope", "Love", "Joy", "Peace", "Patience", "Kindness", "Goodness", "Gentleness", "Self-Control",
+    "Righteousness", "Grace", "Mercy", "Purity", "Holiness", "Humility", "Integrity", "Courage", "Obedience",
+    "Generosity", "Forgiveness", "Wisdom", "Compassion", "Perseverance", "Zeal"
+];
+
 // Communities data structure
 const communities = {};
-let currentCommunity = "A"; // Start with Community A
+let currentCommunityIndex = 0; // Start with the first community
 let juniorCount = 0;
 let seniorCount = 0;
 
+// Initialize all communities
+communityNames.forEach(name => {
+    communities[name] = { juniors: [], seniors: [] };
+});
+
 // Function to assign a camper to a community
 function assignCommunity(classLevel) {
-    // Initialize the current community if not already done
-    if (!communities[currentCommunity]) {
-        communities[currentCommunity] = { juniors: [], seniors: [] };
-    }
+    // Randomly assign to the first 15 communities if they are not full
+    const availableCommunities = communityNames.slice(0, 15).filter(name => {
+        return communities[name].juniors.length < 15 || communities[name].seniors.length < 15;
+    });
 
-    // Assign to the appropriate group (junior or senior)
+    // If the first 15 communities are full, move to the remaining communities
+    if (availableCommunities.length === 0) {
+        const remainingCommunities = communityNames.slice(15).filter(name => {
+            return communities[name].juniors.length < 15 || communities[name].seniors.length < 15;
+        });
+
+        if (remainingCommunities.length > 0) {
+            assignToSpecificCommunity(classLevel, remainingCommunities[0]);
+        }
+    } else {
+        // Randomly pick a community from the available ones
+        const randomCommunity = availableCommunities[Math.floor(Math.random() * availableCommunities.length)];
+        assignToSpecificCommunity(classLevel, randomCommunity);
+    }
+}
+
+// Function to assign a camper to a specific community
+function assignToSpecificCommunity(classLevel, communityName) {
     if (["jss1", "jss2", "jss3"].includes(classLevel)) {
-        if (juniorCount <= 15) {
-            communities[currentCommunity].juniors.push(classLevel);
-            juniorCount++;
-        } else {
-            moveToNextCommunity();
-            assignCommunity(classLevel); // Recurse to assign to the new community
+        if (communities[communityName].juniors.length < 15) {
+            communities[communityName].juniors.push(classLevel);
         }
     } else if (["ss1", "ss2", "ss3"].includes(classLevel)) {
-        if (seniorCount <= 15) {
-            communities[currentCommunity].seniors.push(classLevel);
-            seniorCount++;
-        } else {
-            moveToNextCommunity();
-            assignCommunity(classLevel); // Recurse to assign to the new community
+        if (communities[communityName].seniors.length < 15) {
+            communities[communityName].seniors.push(classLevel);
         }
     }
 }
 
-// Function to move to the next community
-function moveToNextCommunity() {
-    juniorCount = 0;
-    seniorCount = 0;
-    currentCommunity = String.fromCharCode(currentCommunity.charCodeAt(0) + 1); // Move to the next letter
-    communities[currentCommunity] = { juniors: [], seniors: [] }; // Initialize the new community
-}
-
-// Category selection
+// Event listener for category selection
 document.getElementById("category").addEventListener("change", function () {
     const schoolInput = document.getElementById("school");
     const ageInput = document.getElementById("age");
@@ -56,10 +69,8 @@ document.getElementById("category").addEventListener("change", function () {
         classInput.addEventListener("change", function () {
             if (["jss1", "jss2", "jss3", "ss1", "ss2", "ss3"].includes(this.value)) {
                 assignCommunity(this.value);
-                communityInput.value = `Community ${currentCommunity}`;
-            } else if (this.value === "school-leaver") {
-                // Do not assign school leavers to any community
-                communityInput.value = "Not applicable";
+                const assignedCommunity = findAssignedCommunity(this.value);
+                communityInput.value = assignedCommunity ? assignedCommunity : "Not applicable";
             } else {
                 // Clear the community field if no valid class is selected
                 communityInput.value = "";
@@ -78,6 +89,19 @@ document.getElementById("category").addEventListener("change", function () {
         communityInput.value = "Not applicable";
     }
 });
+
+// Function to find the community a camper was assigned to
+function findAssignedCommunity(classLevel) {
+    for (const [communityName, members] of Object.entries(communities)) {
+        if (["jss1", "jss2", "jss3"].includes(classLevel) && members.juniors.includes(classLevel)) {
+            return communityName;
+        }
+        if (["ss1", "ss2", "ss3"].includes(classLevel) && members.seniors.includes(classLevel)) {
+            return communityName;
+        }
+    }
+    return null;
+}
 
 // Ensure fields are disabled by default if no category is selected
 document.addEventListener("DOMContentLoaded", () => {

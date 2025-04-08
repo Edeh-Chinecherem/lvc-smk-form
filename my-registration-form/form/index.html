@@ -8,12 +8,14 @@
   </head>
   <body>
     <div class="form-container">
-        <img src="img/sulogo.jpg" alt="LVC SMK Zone Logo" class="form-logo" />
+      <img src="img/sulogo.jpg" alt="LVC SMK Zone Logo" class="form-logo" />
       <h1 class="form-title">LVC 2025 SMK Zone</h1>
       <form id="registration-form">
+        <!-- Name -->
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required />
 
+        <!-- Gender -->
         <label for="gender">Gender:</label>
         <select id="gender" name="gender" required>
           <option value="">Select</option>
@@ -21,15 +23,19 @@
           <option value="female">Female</option>
         </select>
 
+        <!-- Email -->
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required />
 
+        <!-- Address -->
         <label for="address">Address:</label>
         <textarea id="address" name="address" rows="3" required></textarea>
 
+        <!-- Phone Number -->
         <label for="phone">Phone Number:</label>
         <input type="tel" id="phone" name="phone" required />
 
+        <!-- Category -->
         <label for="category">Category:</label>
         <select id="category" name="category" required>
           <option value="">Select</option>
@@ -38,17 +44,21 @@
           <option value="camper">Camper</option>
         </select>
 
+        <!-- Name of School -->
         <label for="school">Name of School:</label>
-        <input type="text" id="school" name="school" required />
+        <input type="text" id="school" name="school" required disabled />
 
+        <!-- Name of Church -->
         <label for="church">Name of Church:</label>
         <input type="text" id="church" name="church" required />
 
+        <!-- Age -->
         <label for="age">Age:</label>
-        <input type="number" id="age" name="age" min="1" max="100" required />
+        <input type="number" id="age" name="age" min="1" max="100" required disabled />
 
+        <!-- Class -->
         <label for="class">Class:</label>
-        <select id="class" name="class" required>
+        <select id="class" name="class" required disabled>
           <option value="">Select</option>
           <option value="jss1">JSS1</option>
           <option value="jss2">JSS2</option>
@@ -59,34 +69,37 @@
           <option value="school-leaver">School Leaver</option>
         </select>
 
-        
-
+        <!-- Group -->
         <label for="group">Group:</label>
         <select id="group" name="group" required>
           <option value="">Select</option>
           <option value="bariga">Bariga Group</option>
           <option value="ibafor">Ibafor Group</option>
           <option value="ketu">Ketu Group</option>
-          <option value="obanikoro">Obanikoro Group</option> 
+          <option value="obanikoro">Obanikoro Group</option>
           <option value="saw-mill">Saw-mill Group</option>
-          <option value="no-group">No Group</option> 
+          <option value="no-group">No Group</option>
+        </select>
 
+        <!-- Medical Conditions -->
         <label for="medical-conditions">Do you have medical conditions?</label>
         <select id="medical-conditions" name="medical-conditions" required>
           <option value="no">No</option>
           <option value="yes">Yes</option>
         </select>
 
+        <!-- Medical Details -->
         <div id="medical-details-container" style="display: none">
           <label for="medical-details">If yes, please specify:</label>
-          <textarea
-            id="medical-details"
-            name="medical-details"
-            rows="3"
-          ></textarea>
+          <textarea id="medical-details" name="medical-details" rows="3"></textarea>
         </div>
 
-                <button type="submit">Submit</button>
+        <!-- Assigned Community -->
+        <label for="community">Assigned Community:</label>
+        <input type="text" id="community" name="community" placeholder="Assigned Community" readonly />
+
+        <!-- Submit Button -->
+        <button type="submit">Submit</button>
       </form>
     </div>
     <script src="src/script.js"></script>
