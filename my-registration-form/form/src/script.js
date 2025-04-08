@@ -131,5 +131,18 @@ document.getElementById("medical-conditions").addEventListener("change", functio
     }
 });
 
-// Log the communities for debugging (optional)
-console.log("Communities:", communities);
+// Event listener for form submission
+document.getElementById("registration-form").addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevent the default form submission behavior
+
+    // Get the full name from the name field
+    const fullName = document.getElementById("name").value;
+
+    // Pick the first name
+    const firstName = fullName.split(" ")[0]; // Split the name by spaces and pick the first part
+
+    // Display a success alert with the first name
+    alert(`Registration successful! Thank you, ${firstName}.`);
+
+      });
+
