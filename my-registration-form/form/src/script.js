@@ -1,14 +1,45 @@
-// List of communities for junior and senior categories
-const juniorCommunities = ["Junior Community A", "Junior Community B", "Junior Community C"];
-const seniorCommunities = ["Senior Community A", "Senior Community B", "Senior Community C"];
+// Communities data structure
+const communities = {};
+let currentCommunity = "A"; // Start with Community A
+let juniorCount = 0;
+let seniorCount = 0;
 
-// Function to assign a random community
-function assignRandomCommunity(communities) {
-    const randomIndex = Math.floor(Math.random() * communities.length);
-    return communities[randomIndex];
+// Function to assign a camper to a community
+function assignCommunity(classLevel) {
+    // Initialize the current community if not already done
+    if (!communities[currentCommunity]) {
+        communities[currentCommunity] = { juniors: [], seniors: [] };
+    }
+
+    // Assign to the appropriate group (junior or senior)
+    if (["jss1", "jss2", "jss3"].includes(classLevel)) {
+        if (juniorCount <= 15) {
+            communities[currentCommunity].juniors.push(classLevel);
+            juniorCount++;
+        } else {
+            moveToNextCommunity();
+            assignCommunity(classLevel); // Recurse to assign to the new community
+        }
+    } else if (["ss1", "ss2", "ss3"].includes(classLevel)) {
+        if (seniorCount <= 15) {
+            communities[currentCommunity].seniors.push(classLevel);
+            seniorCount++;
+        } else {
+            moveToNextCommunity();
+            assignCommunity(classLevel); // Recurse to assign to the new community
+        }
+    }
 }
 
-// Event listener for category selection
+// Function to move to the next community
+function moveToNextCommunity() {
+    juniorCount = 0;
+    seniorCount = 0;
+    currentCommunity = String.fromCharCode(currentCommunity.charCodeAt(0) + 1); // Move to the next letter
+    communities[currentCommunity] = { juniors: [], seniors: [] }; // Initialize the new community
+}
+
+// Category selection
 document.getElementById("category").addEventListener("change", function () {
     const schoolInput = document.getElementById("school");
     const ageInput = document.getElementById("age");
@@ -23,12 +54,12 @@ document.getElementById("category").addEventListener("change", function () {
 
         // Assign community based on class
         classInput.addEventListener("change", function () {
-            if (["jss1", "jss2", "jss3"].includes(this.value)) {
-                // Assign a junior community
-                communityInput.value = assignRandomCommunity(juniorCommunities);
-            } else if (["ss1", "ss2", "ss3", "school-leaver"].includes(this.value)) {
-                // Assign a senior community
-                communityInput.value = assignRandomCommunity(seniorCommunities);
+            if (["jss1", "jss2", "jss3", "ss1", "ss2", "ss3"].includes(this.value)) {
+                assignCommunity(this.value);
+                communityInput.value = `Community ${currentCommunity}`;
+            } else if (this.value === "school-leaver") {
+                // Do not assign school leavers to any community
+                communityInput.value = "Not applicable";
             } else {
                 // Clear the community field if no valid class is selected
                 communityInput.value = "";
@@ -64,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// Event listener for medical conditions
+// Medical conditions
 document.getElementById("medical-conditions").addEventListener("change", function () {
     const medicalDetailsContainer = document.getElementById("medical-details-container");
     if (this.value === "yes") {
@@ -75,3 +106,6 @@ document.getElementById("medical-conditions").addEventListener("change", functio
         document.getElementById("medical-details").removeAttribute("required");
     }
 });
+
+// Log the communities for debugging (optional)
+console.log("Communities:", communities);
